@@ -1,0 +1,15 @@
+IF EXISTS (SELECT O.name
+           FROM SysObjects O
+           WHERE (O.name = 'Usuarios')
+          )
+BEGIN
+    DROP TABLE Usuarios
+END
+
+IF EXISTS (SELECT O.name
+           FROM SysObjects O
+           WHERE (O.name = 'Despesas')
+          )
+BEGIN
+    DROP TABLE Despesas
+END

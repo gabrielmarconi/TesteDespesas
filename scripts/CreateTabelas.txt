@@ -1,0 +1,26 @@
+IF NOT EXISTS (SELECT O.name
+               FROM SysObjects O
+               WHERE (O.name = 'Usuarios')
+              )
+BEGIN
+    CREATE TABLE Usuarios (
+        IdUsuario INT NOT NULL CONSTRAINT PK_Usuarios_IdUsuario PRIMARY KEY IDENTITY,        
+        NomeUsuario VARCHAR(100) NOT NULL,
+        Senha VARCHAR(255) NOT NULL,
+        Email VARCHAR(255) NOT NULL
+    )
+END
+
+IF NOT EXISTS (SELECT O.name
+               FROM SysObjects O
+               WHERE (O.name = 'Despesas')
+              )
+BEGIN
+    CREATE TABLE Despesas (
+        IdDespesa INT NOT NULL CONSTRAINT PK_Despesas_IdDespesa PRIMARY KEY IDENTITY,        
+        Descricao VARCHAR(191) NOT NULL,
+        DataHora DATETIME NOT NULL,
+        Usuario INT NOT NULL CONSTRAINT FK_Despesas_Usuarios_Usuario FOREIGN KEY (Usuario) REFERENCES Usuarios(IdUsuario) ON DELETE CASCADE ON UPDATE CASCADE,
+        Valor FLOAT NOT NULL
+    )
+END
